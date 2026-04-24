@@ -1,10 +1,3 @@
-window.addEventListener("load", () => {
-  const loader = document.querySelector(".loader");
-  loader.classList.add("loader-hidden");
-  loader.addEventListener("transitioned", () => {
-    document.body.removeChild("loader");
-  });
-});
 document.addEventListener("DOMContentLoaded", function () {
   var img1 = document.querySelector("#nav__img__1");
   var img2 = document.querySelector("#nav__img__2");
@@ -35,13 +28,21 @@ document.addEventListener("DOMContentLoaded", function () {
   var header__nav__idioma2 = document.querySelector(".header__nav__idioma");
   var realBody = document.querySelector("#realBody");
   var header__div = document.querySelector("#header__div");
-  var logo__container = document.querySelector("#logo__container");
+  const vhToPixels = (vh) => (vh * window.innerHeight) / 100;
+
+  var idiomaEspanol = document.querySelector("#espanol__container");
+  var idiomaIngles = document.querySelector("#ingles__container");
+  var idiomaCatalan = document.querySelector("#catalan__container");
+  var idiomaAleman = document.querySelector("#aleman__container");
+  var isCerrado = true;
 
   var modoOscuroClaro = document.querySelector("#modoOscuroClaro");
   var modoOscuroClaro__p = document.querySelector("#modoOscuroClaro__p");
+  var state__changer__nav__modo__p = document.querySelector(
+    "#state__changer__nav__modo__p",
+  );
   var setBrillo = localStorage.getItem("modoBrillo") || "c";
-
-  const vhToPixels = (vh) => (vh * window.innerHeight) / 100;
+  var logo__container = document.querySelector("#logo__container");
 
   function initializeLanguage() {
     if (localStorage.getItem("userLanguage") === null) {
@@ -51,54 +52,9 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   var setIdioma = initializeLanguage();
 
-  var logo__container = document.querySelector("#logo__container");
-  /*  logo__container.addEventListener("click", function () {
-    window.location.href = "http://127.0.0.1:5500/index.html";
-  });
-  var logo__container = document.querySelector("#logo__container");
   logo__container.addEventListener("click", function () {
-    window.location.href = "http://127.0.0.1:5500/index.html";
-  });*/
-  nav1.addEventListener("mouseenter", function () {
-    imagechanger.scrollTop = 0;
+    window.location.href = "http://127.0.0.1:5500/html/index.html";
   });
-  nav2.addEventListener("mouseenter", function () {
-    imagechanger.scrollTop = vhToPixels(101);
-  });
-  nav3.addEventListener("mouseenter", function () {
-    imagechanger.scrollTop = vhToPixels(202);
-  });
-  /*
- nav4.addEventListener("mouseenter", function(){
-     imagechanger.scrollTop = vhToPixels(303);
- })
-*/
-  var cerrado = new Boolean(false);
-  operatenav.addEventListener("click", function () {
-    if (cerrado) {
-      div__drop.style.height = "100%";
-      menubar__1.style.transform = "translateY(2vh) rotate(45deg)";
-      menubar__1.style.background = "white";
-      menubar__2.style.height = "0";
-      menubar__3.style.transform = "translateY(-2vh) rotate(-45deg)";
-      menubar__3.style.background = "white";
-      cerrado = false;
-    } else {
-      div__drop.style.height = "0";
-      menubar__1.style.transform = "";
-      menubar__1.style.background = "#ff7300";
-      menubar__2.style.height = "1.5vh";
-      menubar__3.style.transform = "";
-      menubar__3.style.background = "#ff7300";
-      cerrado = true;
-    }
-  });
-  goup.addEventListener("click", function () {
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
-  });
-
-  var isCerrado = true;
   header__nav__idioma.addEventListener("click", function () {
     if (isCerrado) {
       header__nav__idioma.style.overflow = "visible";
@@ -108,62 +64,32 @@ document.addEventListener("DOMContentLoaded", function () {
       isCerrado = true;
     }
   });
-  let lastScrollTop = 0;
-  window.onscroll = function () {
-    verSiLaPaginaEstaArribaDelTodo();
-    let currentScroll =
-      window.pageYOffset || document.documentElement.scrollTop;
-
-    if (currentScroll > lastScrollTop) {
-      header__div.style.opacity = "1";
-    } else {
-      header__div.style.opacity = "1";
-    }
-    lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
-  };
-  function verSiLaPaginaEstaArribaDelTodo() {
-    if (window.pageYOffset) {
-      goup.style.opacity = 0.5;
-    } else {
-      goup.style.opacity = 0;
-    }
-  }
-  var idiomaEspanol = document.querySelector("#espanol__container");
-  var idiomaIngles = document.querySelector("#ingles__container");
-  var idiomaCatalan = document.querySelector("#catalan__container");
-  var idiomaAleman = document.querySelector("#aleman__container");
 
   var traducciones = {
     e: {
       modoOscuro: 'Modo Oscuro <i class="fa-solid fa-moon"></i>',
       modoClaro: 'Modo Claro <i class="fa-solid fa-sun"></i>',
       navegacion: {
-        nav1: "Inicio",
+        nav1: "Índice",
         nav2: "Contacto",
-        nav3: "Galeria",
+        nav3: "Sobre Nosotros",
         nav4: "Galeria",
         nav5: "Preguntas Frecuentes",
       },
-      titulos__galeria: "Proyectos Caminer",
-      titulos__galeria: "Proyectos",
-      vermas: "Ver Más",
     },
     i: {
       modoOscuro: 'Dark Mode <i class="fa-solid fa-moon"></i>',
       modoClaro: 'Light Mode <i class="fa-solid fa-sun"></i>',
       direccion: `<h1>Contact Us!</h1>
-    <p>PROJECTES I CONSTRUCCIONS CAMINER, Carrer Gran, 112, 07420 Sa Pobla, Balearic Islands</p>`,
+        <p>PROJECTES I CONSTRUCCIONS CAMINER, Carrer Gran, 112, 07420 Sa Pobla, Balearic Islands</p>`,
       llegar: `HOW TO GET THERE?`,
       navegacion: {
         nav1: "Home",
         nav2: "Contact",
-        nav3: "Gallery",
+        nav3: "About Us",
         nav4: "Gallery",
         nav5: "FAQ",
       },
-      titulos__galeria: "Caminer Projects",
-      titulos__galeria: "Projects",
-      vermas: "See More",
     },
     c: {
       modoOscuro: 'Mode Fosc <i class="fa-solid fa-moon"></i>',
@@ -175,9 +101,6 @@ document.addEventListener("DOMContentLoaded", function () {
         nav4: "Galeria",
         nav5: "Preguntes Freqüents",
       },
-      titulos__galeria: "Projectes Caminer",
-      titulos__galeria: "Títol",
-      vermas: "Veure Més",
     },
 
     a: {
@@ -190,9 +113,6 @@ document.addEventListener("DOMContentLoaded", function () {
         nav4: "Galerie",
         nav5: "Häufige Fragen",
       },
-      titulos__galeria: "Caminer Projekte",
-      titulos__galeria: "Titel",
-      vermas: "Mehr Sehen",
     },
   };
   function cambiarIdiomaIndex(idiomaSelect) {
@@ -200,33 +120,9 @@ document.addEventListener("DOMContentLoaded", function () {
     Object.keys(idioma.navegacion).forEach(function (claveNav) {
       var elementoNav = document.getElementById(claveNav);
       if (elementoNav) {
-        elementoNav.innerHTML = `<p><b class="num__nav">${claveNav.slice(
-          -1,
-        )}.</b>${idioma.navegacion[claveNav]}</p>`;
+        elementoNav.innerHTML = `<p><b class="num__nav">${claveNav.slice(-1)}.</b>${idioma.navegacion[claveNav]}</p>`;
       }
     });
-    titulos__galeria.innerHTML = `${idioma.titulos__galeria}`;
-    var titulosGaleria = document.querySelectorAll(".titulo__galeria");
-    var verMasElements = document.querySelectorAll(".vermas");
-
-    titulosGaleria.forEach(function (titulo) {
-      titulo.innerHTML = idioma.titulos__galeria;
-    });
-
-    verMasElements.forEach(function (verMas) {
-      verMas.innerHTML = idioma.vermas;
-    });
-
-    if (
-      localStorage.getItem("modoBrillo") == null ||
-      localStorage.getItem("modoBrillo") == "o"
-    ) {
-      //modoOscuroClaro__p.innerHTML = `${idioma.modoOscuro}`
-      // state__changer__nav__modo__p.innerHTML = `${idioma.modoOscuro}`;
-    } else {
-      //  modoOscuroClaro__p.innerHTML = `${idioma.modoClaro}`
-      //state__changer__nav__modo__p.innerHTML = `${idioma.modoClaro}`;
-    }
   }
 
   cambiarIdiomaHtml();
@@ -238,15 +134,6 @@ document.addEventListener("DOMContentLoaded", function () {
     cambiarIdiomaHtml();
     attachEventListeners();
   }
-  var otrosIdiomasContainer = document.querySelector("#otrosIdiomasContainer");
-  state__changer__nav__idioma.addEventListener("click", function () {
-    otrosIdiomasContainer.style.width = "20vh";
-    otrosIdiomasContainer.style.height = "20vh";
-  });
-  otrosIdiomasContainer.addEventListener("click", function () {
-    otrosIdiomasContainer.style.width = "0vh";
-    otrosIdiomasContainer.style.height = "0vh";
-  });
   function attachEventListeners() {
     idiomaEspanol = document.querySelector("#espanol__container");
     idiomaIngles = document.querySelector("#ingles__container");
@@ -262,34 +149,30 @@ document.addEventListener("DOMContentLoaded", function () {
     ingles__circle.addEventListener("click", function () {
       cambiarIdioma("i");
     });
-    /*
-    catalan__circle.addEventListener("click", function(){
-        cambiarIdioma('c');
-    })
-    alemna__circle.addEventListener("click", function(){
-        cambiarIdioma('a');
-    })
-        */
     idiomaEspanol.addEventListener("click", function () {
       cambiarIdioma("e");
     });
     idiomaIngles.addEventListener("click", function () {
       cambiarIdioma("i");
-    }); /*
-    idiomaCatalan.addEventListener("click", function(){
-        cambiarIdioma('c');
-    })
-    idiomaAleman.addEventListener("click", function(){
-        cambiarIdioma('a');
-    })*/
+    });
   }
+  var otrosIdiomasContainer = document.querySelector("#otrosIdiomasContainer");
+  state__changer__nav__idioma.addEventListener("click", function () {
+    otrosIdiomasContainer.style.width = "20vh";
+    otrosIdiomasContainer.style.height = "20vh";
+  });
+  otrosIdiomasContainer.addEventListener("click", function () {
+    otrosIdiomasContainer.style.width = "0vh";
+    otrosIdiomasContainer.style.height = "0vh";
+  });
+
   function cambiarIdiomaHtml() {
     if (localStorage.getItem("userLanguage") == "e") {
-      header__nav__idioma.innerHTML = `<div id="espanol__container" class="header__nav__idioma"><div id="espanol" class="header__nav__idioma__logo"></div></div><div id="ingles__container" class="header__nav__idioma"><div id="ingles" class="header__nav__idioma__logo"></div></div>`;
+      header__nav__idioma.innerHTML = `<div id="espanol__container" class="header__nav__idioma"><div id="espanol" class="header__nav__idioma__logo"></div></div><div id="ingles__container" class="header__nav__idioma"><div id="ingles" class="header__nav__idioma__logo"></div></div><div id="aleman__container" class="header__nav__idioma"><div id="aleman" class="header__nav__idioma__logo"></div></div><div id="catalan__container" class="header__nav__idioma"><div id="catalan" class="header__nav__idioma__logo"></div></div>`;
       state__changer__nav__idioma.innerHTML = `<div id="espanol__container__nav" class="header__nav__idioma__nav"><div id="espanol" class="header__nav__idioma__logo"></div></div>`;
     }
     if (localStorage.getItem("userLanguage") == "i") {
-      header__nav__idioma.innerHTML = `<div id="ingles__container" class="header__nav__idioma"><div id="ingles" class="header__nav__idioma__logo"></div></div><div id="espanol__container" class="header__nav__idioma"><div id="espanol" class="header__nav__idioma__logo"></div></div>`;
+      header__nav__idioma.innerHTML = `<div id="ingles__container" class="header__nav__idioma"><div id="ingles" class="header__nav__idioma__logo"></div></div><div id="espanol__container" class="header__nav__idioma"><div id="espanol" class="header__nav__idioma__logo"></div></div><div id="aleman__container" class="header__nav__idioma"><div id="aleman" class="header__nav__idioma__logo"></div></div><div id="catalan__container" class="header__nav__idioma"><div id="catalan" class="header__nav__idioma__logo"></div></div>`;
       state__changer__nav__idioma.innerHTML = `<div id="ingles__container__nav" class="header__nav__idioma__nav"><div id="ingles" class="header__nav__idioma__logo"></div></div>`;
     }
     if (localStorage.getItem("userLanguage") == "c") {
@@ -308,16 +191,7 @@ document.addEventListener("DOMContentLoaded", function () {
     setBrillo = brillo;
     localStorage.setItem("modoBrillo", setBrillo);
   }
-  /*
-modoOscuroClaro.addEventListener("click", function () {
-    if(localStorage.getItem('modoBrillo') == null || localStorage.getItem('modoBrillo') == 'o'){
-        cambiarBrillo('c')
-    }
-    else{
-        cambiarBrillo('o')
-    }
-    cambiarBrilloHTML();
-});*/
+
   state__changer__nav__modo.addEventListener("click", function () {
     if (
       localStorage.getItem("modoBrillo") == null ||
@@ -372,15 +246,76 @@ modoOscuroClaro.addEventListener("click", function () {
     }
   }
 
-  document.querySelectorAll(".galeria__entrada").forEach((entrada, index) => {
-    entrada.addEventListener("click", () => {
-      // Cambia las rutas según tus archivos reales
-      const rutas = [
-        "./proyectos/proyecto__1.html",
-        "./proyectos/proyecto__2.html",
-        "./proyectos/proyecto__3.html",
-      ];
-      window.location.href = rutas[index];
-    });
+  let lastScrollTop = 0;
+  window.onscroll = function () {
+    verSiLaPaginaEstaArribaDelTodo();
+    let currentScroll =
+      window.pageYOffset || document.documentElement.scrollTop;
+
+    if (currentScroll > lastScrollTop) {
+      header__div.style.opacity = "0";
+    } else {
+      header__div.style.opacity = "1";
+    }
+    lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+  };
+  function verSiLaPaginaEstaArribaDelTodo() {
+    if (window.pageYOffset) {
+      goup.style.opacity = 0.5;
+    } else {
+      goup.style.opacity = 0;
+    }
+  }
+
+  nav1.addEventListener("mouseenter", function () {
+    imagechanger.scrollTop = 0;
+  });
+  nav2.addEventListener("mouseenter", function () {
+    imagechanger.scrollTop = vhToPixels(101);
+  });
+  nav3.addEventListener("mouseenter", function () {
+    imagechanger.scrollTop = vhToPixels(202);
+  });
+
+  var cerrado = new Boolean(false);
+  operatenav.addEventListener("click", function () {
+    if (cerrado) {
+      div__drop.style.height = "100%";
+      menubar__1.style.transform = "translateY(2vh) rotate(45deg)";
+      menubar__1.style.background = "white";
+      menubar__2.style.height = "0";
+      menubar__3.style.transform = "translateY(-2vh) rotate(-45deg)";
+      menubar__3.style.background = "white";
+      cerrado = false;
+    } else {
+      div__drop.style.height = "0";
+      menubar__1.style.transform = "";
+      menubar__1.style.background = "orange";
+      menubar__2.style.height = "1.5vh";
+      menubar__3.style.transform = "";
+      menubar__3.style.background = "orange";
+      cerrado = true;
+    }
+  });
+  goup.addEventListener("click", function () {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  });
+
+  function checkVisible(elm) {
+    var rect = elm.getBoundingClientRect();
+    var viewHeight = Math.max(
+      document.documentElement.clientHeight,
+      window.innerHeight,
+    );
+    return !(rect.bottom < 0 || rect.top - viewHeight >= 0);
+  }
+});
+
+window.addEventListener("load", () => {
+  const loader = document.querySelector(".loader");
+  loader.classList.add("loader-hidden");
+  loader.addEventListener("transitioned", () => {
+    document.body.removeChild("loader");
   });
 });

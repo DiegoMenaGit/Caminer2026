@@ -68,9 +68,9 @@ document.addEventListener("DOMContentLoaded", function () {
   var setIdioma = initializeLanguage();
 
   var logo__container = document.querySelector("#logo__container");
-  logo__container.addEventListener("click", function () {
+  /* logo__container.addEventListener("click", function () {
     window.location.href = "http://127.0.0.1:5500/index.html";
-  });
+  });*/
   texto__mapa__p.addEventListener("click", function () {
     var nuevaURL =
       "https://www.google.com/maps/dir//PROJECTES+I+CONSTRUCCIONS+CAMINER,+Carrer+Gran,+112,+07420+Sa+Pobla,+Balearic+Islands/@39.7677307,3.0221254,20z/data=!4m9!4m8!1m0!1m5!1m1!1s0x1297cdfca93cbf6f:0x6b57ae7b4e588071!2m2!1d3.0223604!2d39.7677382!3e0?entry=ttu";
